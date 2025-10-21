@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gmail Activity Tracker</title>
+  <style>
+    :root {
+      --bg: #1a1a2e;
+      --surface: #16213e;
+      --accent: #e94560;
+      --text: #eaeaea;
+      --text-dim: #8892b0;
+      --border: #2a2a4a;
+      --green: #0ead69;
+      --red: #e94560;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      width: 280px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      text-align: center;
+    }
+
+    .title span {
+      background: linear-gradient(135deg, #e94560, #f06292);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-dim);
+      background: var(--surface);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    .status-dot.connected {
+      background: var(--green);
+    }
+
+    .open-btn {
+      width: 100%;
+      padding: 10px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .open-btn:hover { opacity: 0.85; }
+    .open-btn:disabled { opacity: 0.4; cursor: default; }
+  </style>
+</head>
+<body>
+  <div class="title">📧 <span>Gmail Tracker</span></div>
+
+  <div class="status-badge">
+    <div class="status-dot" id="statusDot"></div>
+    <span id="statusText">Checking…</span>
+  </div>
+
+  <button class="open-btn" id="openAW">Open ActivityWatch ↗</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>

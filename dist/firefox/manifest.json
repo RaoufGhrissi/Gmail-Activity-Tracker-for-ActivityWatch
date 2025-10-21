@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+  "name": "Gmail Activity Tracker for ActivityWatch",
+  "version": "1.0",
+  "description": "Tracks Gmail activity and pushes events to ActivityWatch.",
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://mail.google.com/*",
+    "http://localhost/*"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self'; object-src 'none';",
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Gmail Activity Tracker",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
