@@ -1,3 +1,4 @@
+const _browser = globalThis.browser || globalThis.chrome;
 const activeSessions = {
   composing: null, // { startTime, lastMeta }
   reading: null,   // { type, key, startTime, lastMeta }
@@ -83,8 +84,8 @@ function processGmailActivity() {
 }
 
 function updateBackgroundCache(type, meta) {
-    if (typeof chrome !== "undefined" && chrome.runtime?.id) {
-        chrome.runtime.sendMessage({ type: "aw_cache_update", data: { activity: type, ...meta } });
+    if (typeof _browser !== "undefined" && _browser.runtime?.id) {
+        _browser.runtime.sendMessage({ type: "aw_cache_update", data: { activity: type, ...meta } });
     }
 }
 
@@ -98,7 +99,7 @@ function finishSession(type, session) {
     finished_at: new Date().toISOString()
   };
 
-  chrome.runtime.sendMessage({ type: "aw_event_finished", data });
+  _browser.runtime.sendMessage({ type: "aw_event_finished", data });
 }
 
 setInterval(() => {

@@ -1,10 +1,11 @@
+const _browser = globalThis.browser || globalThis.chrome;
 let AW_BASE_URL = "http://localhost:5600/api/0";
 const BUCKET_ID = "aw-watcher-gmail";
 let CURRENT_PORT = "5600";
 
 // ── Load Port Settings & Status ─────────────────────────────────────────────
 async function initSettings() {
-  const settings = await chrome.storage.local.get("aw_port");
+  const settings = await _browser.storage.local.get("aw_port");
   CURRENT_PORT = settings.aw_port || "5600";
   document.getElementById("portInput").value = CURRENT_PORT;
   AW_BASE_URL = `http://localhost:${CURRENT_PORT}/api/0`;
@@ -20,7 +21,7 @@ const saveBtn = document.getElementById("savePort");
 const triggerSave = async () => {
   const port = portInput.value.trim();
   if (port && port !== CURRENT_PORT) {
-    await chrome.storage.local.set({ aw_port: port });
+    await _browser.storage.local.set({ aw_port: port });
     location.reload();
   }
 };
@@ -37,7 +38,7 @@ saveBtn.addEventListener("click", triggerSave);
 
 document.getElementById("clearAll").addEventListener("click", async () => {
   if (confirm("Clear all local history and active caches?")) {
-    await chrome.storage.local.remove(["event_history", "compose_cache", "reading_cache"]);
+    await _browser.storage.local.remove(["event_history", "compose_cache", "reading_cache"]);
     location.reload();
   }
 });
@@ -68,7 +69,7 @@ async function loadEvents() {
   const emptyEl = document.getElementById("emptyState");
 
   const { compose_cache = null, reading_cache = null, event_history = [] } = 
-    await chrome.storage.local.get(["compose_cache", "reading_cache", "event_history"]);
+    await _browser.storage.local.get(["compose_cache", "reading_cache", "event_history"]);
 
   listEl.innerHTML = "";
   let totalCount = 0;
