@@ -3,6 +3,12 @@
   "name": "Gmail Activity Tracker for ActivityWatch",
   "version": "1.0",
   "description": "Tracks Gmail activity (reading inbox, reading emails, composing) and pushes events to ActivityWatch.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "gmail-tracker-aw@raouf.dev",
+      "strict_min_version": "109.0"
+    }
+  },
   "permissions": [
     "tabs",
     "storage"
